@@ -4,14 +4,13 @@ from fastapi.responses import JSONResponse
 from fastapi import status
 
 
-delete = APIRouter(prefix="/email", tags=["email"])
+put = APIRouter(prefix="/newsletter", tags=["email"])
 
-@delete.delete("/email/")
-async def delete_email(email: str):
+@put.put("/email/")
+async def regist_email(email: str):
     return JSONResponse(
         content=jsonable_encoder({
-            "msg": "email deleted"
+            "msg": "email registed!"
         }),
-        status_code=status.HTTP_200_OK
+        status_code=status.HTTP_201_CREATED,
     )
-
