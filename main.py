@@ -26,8 +26,8 @@ app.add_middleware(
     allow_headers=["*"],
     allow_credentials=True
 )
-if __name__=='__main__':
-    """run the server with uvicorn"""
-    uvicorn.run(
-        app=app
-    )
+# if __name__=='__main__':
+#     """run the server with uvicorn"""
+#     uvicorn.run(
+#         app=app
+#     )
