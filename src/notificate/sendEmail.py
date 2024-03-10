@@ -13,6 +13,7 @@ from src.infra.repository import Repository
 
 
 
+
 class Email:
     def __init__(self):
         self.__host = os.getenv("EMAIL_HOST_SERVER")
@@ -21,6 +22,7 @@ class Email:
         self.__user = os.getenv("EMAIL_USER")
 
         self.__connect()
+
 
     def __connect(self):
         """connect to de server email and login"""
@@ -37,27 +39,41 @@ class Email:
                     user=self.__user,
                     password=self.__pwd
                 )
-        except Exception as error:
-            print(error)
-            print("Error conecting, check your internet connection!")
+        except:
+            self.set_response(
+                error="Error conecting, check your internet connection!",
+                msg= "email don't sended",
+                status=400)
         else:
+            self.set_response(msg= "email sended with sucess")
             self.MIMEMessage = MIMEMultipart()
+
 
     def send(self):
         """send email for susbcribers"""
-        self.format_message()
+        try:
+            self.format_message()
 
-        self.MIMEMessage["From"] = self.__user
-        self.MIMEMessage["Subject"] = "Notícias actualizadas do país"
+            self.MIMEMessage["From"] = self.__user
+            self.MIMEMessage["Subject"] = "Notícias actualizadas do país"
 
-        self.MIMEMessage.attach(MIMEText(self.messageModel, "html"))
+            self.MIMEMessage.attach(MIMEText(self.messageModel, "html"))
 
-        self.server.sendmail(
-            self.MIMEMessage["From"], 
-            Email.get_emails(), 
-            self.MIMEMessage.as_string().encode("utf-8")
-        )
-        self.server.quit()
+            self.server.sendmail(
+                self.MIMEMessage["From"], 
+                Email.get_emails(), 
+                self.MIMEMessage.as_string().encode("utf-8")
+            )
+        except Exception as error:
+            self.set_response(
+                error="error sending, you not be connected",
+                msg="email don't sended",
+                status=400
+            )
+        else:
+            self.set_response(msg="email was sended with sucess")
+            self.server.quit()
+        return self.response
     
 
     def format_message(self):
@@ -86,3 +102,11 @@ class Email:
                 item["email"]
             )
         return __emails
+
+    def set_response(self, msg: str, status: int = None, error: str = ""):
+        """create a response for request api"""
+        self.response = {
+                "error": f"{error}",
+                "msg": msg,
+                "status": status
+            }

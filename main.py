@@ -28,9 +28,6 @@ app.add_middleware(
 )
 if __name__=='__main__':
     """run the server with uvicorn"""
-    # ScrapSystem().get_news()
-    email_ = Email()
-    email_.send()
-    # uvicorn.run(
-    #     app=app
-    # )
+    uvicorn.run(
+        app=app
+    )
