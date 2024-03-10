@@ -19,9 +19,9 @@ class Controller:
             session.execute(newspapper.delete())
             session.commit()
 
-    def update_newspapper(newspapper: list) -> bool:
+    def update_newspapper(_newspapper: list) -> bool:
         """update newspapper"""
         with Session(engine) as session:
-            session.execute(newspapper.insert(), newspapper)   
+            session.execute(newspapper.insert(), _newspapper)   
             session.commit()
         

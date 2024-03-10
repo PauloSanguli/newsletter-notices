@@ -8,6 +8,7 @@ from src.infra.http.routes.delete import delete
 
 import uvicorn
 
+from src.__bs.request import ScrapSystem
 
 
 
@@ -26,6 +27,7 @@ app.add_middleware(
 )
 if __name__=='__main__':
     """run the server with uvicorn"""
-    uvicorn.run(
-        app=app
-    )
+    ScrapSystem().get_news()
+    # uvicorn.run(
+    #     app=app
+    # )

@@ -23,6 +23,7 @@ newspapper = Table(
     Column("date_publish", post.DATE, nullable=False, default=datetime.utcnow()),
     Column("content", post.TEXT, nullable=False),
     Column("header", post.TEXT, nullable=False),
+    Column("category", post.TEXT),
     Column("img", post.TEXT)
 )
 

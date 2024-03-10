@@ -25,6 +25,7 @@ class Formater:
                 id=__news.id,
                 content=__news.content,
                 header=__news.header,
+                category=__news.header,
                 date_publish=__news.date_publish,
                 img=__news.img
             )

@@ -10,6 +10,7 @@ class Newspapper(BaseModel):
     header: str
     content: str
     img: str
+    category: str
     date_publish: date
     id: int
 
