@@ -11,6 +11,8 @@ from fastapi import status
 
 from sqlalchemy.exc import IntegrityError
 
+from src.infra.formaters import Formater
+
 
 class Repository(IRepository):
     """repository for all models"""
@@ -46,8 +48,11 @@ class Repository(IRepository):
         """select all emails from db"""
         with Session(engine) as session:
             datas = session.execute(emails.select()).fetchall()
+        return Formater.email(datas)
+        
 
     def get_all_newspapper() -> list:
         """select all newspapper from db"""
         with Session(engine) as session:
             datas = session.execute(newspapper.select()).fetchall()
+        return Formater.newspapper(datas)

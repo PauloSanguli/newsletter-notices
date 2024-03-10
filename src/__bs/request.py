@@ -1,0 +1,1 @@
+"""fetch datas from blog"""

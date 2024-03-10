@@ -3,3 +3,4 @@ from .models import (
     newspapper,
     emails
 )
+from .serializers import Newspapper, Emails
