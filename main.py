@@ -5,11 +5,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.infra.http.routes.put import put
 from src.infra.http.routes.get import get
 from src.infra.http.routes.delete import delete
+from src.infra.http.routes.patch import patch
 
 import uvicorn
 
-from src.__bs.request import ScrapSystem
-from src.notificate.sendEmail import Email
 
 
 
@@ -18,6 +17,7 @@ app = FastAPI(title="newsletter api")
 app.include_router(put)
 app.include_router(get)
 app.include_router(delete)
+app.include_router(patch)
 
 app.add_middleware(
     CORSMiddleware,
