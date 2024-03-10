@@ -2,12 +2,15 @@
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy import Table
 from sqlalchemy import Column
-from sqlalchemy.dialects import postgresql as post
+# from sqlalchemy.dialects import postgresql as post
+import sqlalchemy as post
 
 from datetime import datetime
 
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 
 engine = create_engine(os.getenv("DATABASE_URI"))
@@ -26,6 +29,6 @@ newspapper = Table(
 emails = Table(
     "emails",
     metadata,
-    Column("id", post.INTEGER,primary_key=True, auto_increment=True),
+    Column("id", post.INTEGER,primary_key=True, autoincrement=True),
     Column("email", post.VARCHAR(80), nullable=False, unique=True)
 )
